@@ -380,7 +380,7 @@ const ConfessWebsite = memo(() => {
                   <div className="flex items-center justify-center gap-3 mb-6">
                     <Heart className="w-8 h-8 text-coral animate-heartbeat" fill="#FF9494" />
                     <h2 className="text-2xl md:text-4xl font-display text-gray-800">
-                      Mau nggak jadi pacar aku?
+                      Do you want to be my girlfriend?
                     </h2>
                     <Heart className="w-8 h-8 text-coral animate-heartbeat" fill="#FF9494" />
                   </div>
@@ -520,10 +520,7 @@ const ConfessWebsite = memo(() => {
                 <div className="bg-gradient-to-r from-pink-100 to-rose-100 rounded-2xl p-6 mb-6 border border-pink-200">
                   <h4 className="text-lg font-display text-coral mb-2">💌 Pesan Spesial</h4>
                   <p className="text-base md:text-lg font-body text-gray-700 italic leading-relaxed">
-                    "Kamu adalah hal terbaik yang pernah terjadi padaku. 
-                    Setiap momen bersamamu adalah kenangan yang ingin aku simpan selamanya. 
-                    Terima kasih sudah menjadi bagian dari hidupku. 
-                    Aku mencintaimu, sekarang dan selamanya. 💕"
+                    "Iziiinnn ,haloo riaaa,Makasih ya udah selalu ada dan sabar sama aku. Nggak selalu gampang, kadang aku juga ribet sendiri 😅, Tapi bareng kamu, hal-hal yang harusnya bikin pusing jadi lebih ketawa dikit, stresnya berkurang, ya walaupun cmn aku yg stress wkwk ,makasih udah mampir di hidup aku :3"
                   </p>
                 </div>
                 
