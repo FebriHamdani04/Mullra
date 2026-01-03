@@ -22,12 +22,12 @@ const ConfessWebsite = memo(() => {
 
 
   const galleryPhotos = useMemo(() => [
-    { id: 1, src: '/image.png', caption: 'Kenangan pertama kita bersama' },
-    { id: 2, src: '/image1.png', caption: 'Saat aku tahu kamu spesial' },
-    { id: 3, src: '/image2.png', caption: 'Momen yang ingin aku abadikan' },
-    { id: 4, src: '/image3.png', caption: 'Bukti bahwa kita pantas bersama' },
-    { id: 5, src: '/image4.png', caption: 'Setiap tawa bersamamu' },
-    { id: 6, src: '/image5.png', caption: 'Selamanya denganmu' },
+    { id: 1, src: 'image.png', caption: 'Kenangan pertama kita bersama' },
+    { id: 2, src: 'image1.png', caption: 'Saat aku tahu kamu spesial' },
+    { id: 3, src: 'image2.png', caption: 'Momen yang ingin aku abadikan' },
+    { id: 4, src: 'image3.png', caption: 'Bukti bahwa kita pantas bersama' },
+    { id: 5, src: 'image4.png', caption: 'Setiap tawa bersamamu' },
+    { id: 6, src: 'image5.png', caption: 'Selamanya denganmu' },
   ], []);
 
 
@@ -157,7 +157,7 @@ const ConfessWebsite = memo(() => {
 
       <audio
         ref={audioRef}
-        src="/glue-song.mp3"
+        src="glue-song.mp3"
         loop
         onPlay={() => setMusicPlaying(true)}
         onPause={() => setMusicPlaying(false)}
