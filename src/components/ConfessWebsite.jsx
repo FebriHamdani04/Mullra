@@ -13,6 +13,7 @@ const ConfessWebsite = memo(() => {
   const [typedText, setTypedText] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [showFireworks, setShowFireworks] = useState(false);
+  const [cursorTrail, setCursorTrail] = useState([]);
   
   const noButtonRef = useRef(null);
   const containerRef = useRef(null);
@@ -54,6 +55,27 @@ const ConfessWebsite = memo(() => {
     'Aku kabur! 🏃',
   ], []);
 
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (Math.random() > 0.8) { // Performance optimization: only add sparkle occasionally
+        const newSparkle = {
+          id: Math.random(),
+          x: e.clientX,
+          y: e.clientY,
+          color: ['#FF9494', '#FFD1D1', '#FFF', '#FFB6C1'][Math.floor(Math.random() * 4)]
+        };
+        setCursorTrail(prev => [...prev.slice(-15), newSparkle]); // Keep only last 15
+        
+        setTimeout(() => {
+          setCursorTrail(prev => prev.filter(s => s.id !== newSparkle.id));
+        }, 800);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   useEffect(() => {
     if (envelopeOpen) {
@@ -166,6 +188,44 @@ const ConfessWebsite = memo(() => {
         }}
       />
 
+      {/* Floating Particles (Fireflies) */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        {[...Array(30)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white/60 blur-[1px]"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              width: `${Math.random() * 4 + 2}px`,
+              height: `${Math.random() * 4 + 2}px`,
+              animation: `floatParticle ${10 + Math.random() * 20}s linear infinite`,
+              animationDelay: `-${Math.random() * 20}s`,
+              opacity: Math.random() * 0.5 + 0.2,
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Cursor Trail */}
+      <div className="fixed inset-0 pointer-events-none z-50">
+        {cursorTrail.map((sparkle) => (
+          <div
+            key={sparkle.id}
+            className="absolute rounded-full animate-ping"
+            style={{
+              left: sparkle.x,
+              top: sparkle.y,
+              width: '8px',
+              height: '8px',
+              backgroundColor: sparkle.color,
+              transform: 'translate(-50%, -50%)',
+              transition: 'opacity 0.8s ease-out',
+            }}
+          />
+        ))}
+      </div>
+
 
       {envelopeOpen && musicPlaying && (
         <div className="fixed top-4 right-4 z-50 bg-white/30 backdrop-blur-xl rounded-2xl p-3 shadow-xl border border-white/40">
@@ -252,6 +312,11 @@ const ConfessWebsite = memo(() => {
                     src={photo.src} 
                     alt={photo.caption} 
                     className="w-full h-full object-cover"
+                    style={{
+                      animation: `panImage ${15 + (photo.id % 3) * 5}s ease-in-out infinite alternate`,
+                      animationDelay: `${photo.id * 2}s`,
+                      boxShadow: '0 4px 20px rgba(255, 148, 148, 0.6)'
+                    }}
                     loading="eager"
                   />
                 </div>
@@ -260,6 +325,26 @@ const ConfessWebsite = memo(() => {
               <div className="absolute inset-0 bg-black/50"></div>
 
               <div className="absolute inset-0 bg-gradient-to-b from-blush/30 via-transparent to-blush/30"></div>
+              
+              {/* Confetti Effect for Gallery */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+                {[...Array(10)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute"
+                    style={{
+                      left: `${(i * 10) % 100}%`,
+                      top: '-20px',
+                      fontSize: '24px',
+                      willChange: 'transform',
+                      animation: `confettiFall ${4 + (i % 3)}s ease-out ${(i % 5) * 0.5}s infinite`,
+                      opacity: 0.7,
+                    }}
+                  >
+                    {['🎉', '💖', '✨', '🌸', '💕'][i % 5]}
+                  </div>
+                ))}
+              </div>
             </div>
             
             <div className="max-w-2xl mx-auto w-full relative z-10 px-6 my-8">
@@ -684,6 +769,22 @@ const ConfessWebsite = memo(() => {
             transform: scale(3) rotate(540deg);
             opacity: 0;
           }
+        }
+
+        @keyframes panImage {
+          0% { transform: scale(1.1) translate(0%, 0%); }
+          25% { transform: scale(1.2) translate(-1%, 1%); }
+          50% { transform: scale(1.1) translate(1%, 1%); }
+          75% { transform: scale(1.2) translate(1%, -1%); }
+          100% { transform: scale(1.1) translate(0%, 0%); }
+        }
+
+        @keyframes floatParticle {
+          0% { transform: translate(0, 0); }
+          25% { transform: translate(20px, -20px); }
+          50% { transform: translate(0, -40px); }
+          75% { transform: translate(-20px, -20px); }
+          100% { transform: translate(0, 0); }
         }
       `}</style>
     </div>
