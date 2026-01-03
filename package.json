@@ -2,6 +2,7 @@
   "name": "confess-website",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://febrihamdani04.github.io/Mullra/",
   "type": "module",
   "scripts": {
     "dev": "vite",
