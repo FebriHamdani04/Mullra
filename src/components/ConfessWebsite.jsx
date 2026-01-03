@@ -136,6 +136,7 @@ const ConfessWebsite = memo(() => {
       
 
       if (audioRef.current) {
+        audioRef.current.volume = 0.35;
         audioRef.current.currentTime = 50;
         audioRef.current.play().catch(() => {
           setMusicPlaying(true);
@@ -610,7 +611,7 @@ const ConfessWebsite = memo(() => {
                 </div>
                 
                 <p className="text-lg md:text-xl text-gray-700 italic font-display font-semibold mb-4">
-                  "Aku janji akan selalu memilih kamu."
+                  "Aku janji akan selalu memilih kamu. Makasih udah mau nerima aku ❤️"
                 </p>
                 
                 <div className="flex items-center justify-center gap-3">
